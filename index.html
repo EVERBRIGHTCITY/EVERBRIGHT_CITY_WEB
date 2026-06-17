@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everbright City Official Municipal Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Premium Archival Colorway */
+            --bg-cream: #f6f3eb;
+            --brand-navy: #031424;
+            --brand-gold: #bfa15f;
+            --brand-gold-muted: #e5dfd3;
+            --text-dark: #1d252d;
+            --text-muted: #5c656e;
+            --surface-white: #ffffff;
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Inter', sans-serif;
+            /* Admin Core Overrides */
+            --admin-bg: #090d16;
+            --admin-green: #00ff66;
+            --admin-text: #d1d9e6;
+        }
+
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+        }
+
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- STYLISH NAVIGATION --- */
+        header {
+            width: 100%;
+            background: var(--brand-navy);
+            border-bottom: 2px solid var(--brand-gold);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-family: var(--font-serif);
+            font-weight: 500;
+            font-size: 1.4rem;
+            color: var(--bg-cream);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-brand span { 
+            color: var(--brand-gold); 
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-link {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            padding: 6px 0;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active { 
+            color: var(--brand-gold); 
+        }
+
+        .nav-link.active::after {
+            content: "";
+            position: absolute;
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 1px;
+            background: var(--brand-gold);
+        }
+
+        /* --- DISPLAY LAYOUT MODULATORS --- */
+        .tab-content {
+            display: none;
+            animation: paneFade 0.4s ease-out forwards;
+        }
+
+        .tab-content.active { 
+            display: block; 
+        }
+
+        @keyframes paneFade {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ASYMMETRICAL HERO GRID --- */
+        .hero-banner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 32px 50px 32px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-left h2 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            color: var(--brand-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+        }
+
+        .hero-left h1 {
+            font-family: var(--font-serif);
+            font-size: 4.5rem;
+            font-weight: 400;
+            line-height: 1.05;
+            color: var(--brand-navy);
+            margin-bottom: 24px;
+        }
+
+        .hero-left .divider {
+            width: 80px;
+            height: 1px;
+            background: var(--brand-gold);
+            margin-bottom: 24px;
+        }
+
+        .hero-left p {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        /* PREMIUM IMAGE LAYOUT FRAMES */
+        .photo-matrix {
+            background: #ffffff;
+            border: 1px solid var(--brand-gold-muted);
+            padding: 12px;
+            box-shadow: 0 8px 30px rgba(3, 20, 36, 0.03);
+            display: block;
+            width: 100%;
+        }
+
+        .photo-matrix img {
+            width: 100%;
+            height: auto;
+            max-height: 420px;
+            display: block;
+            object-fit: cover;
+            aspect-ratio: 16 / 11;
+            border: 1px solid rgba(191, 161, 95, 0.15);
+        }
+
+        /* --- EDITORIAL SECTIONS & COLUMNS --- */
+        .magazine-layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 32px 80px 32px;
+            border-top: 1px solid var(--brand-gold-muted);
+        }
+
+        .two-column { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+        }
+
+        .three-column { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; 
+        }
+
+        .article-block h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--brand-navy);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .article-block p {
+            font-size: 0.95rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .article-block .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--brand-gold);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* --- SYSTEM CHECKLIST STYLE --- */
+        .checklist-group { 
+            list-style: none; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 16px; 
+        }
+
+        .checklist-group li {
+            font-size: 1.05rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .checklist-group li::before {
+            content: "✓";
+            color: var(--brand-gold);
+            font-weight: bold;
+        }
+
+        /* --- MINIMAL LIST STYLE --- */
+        .bullet-list { 
+            list-style: none; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 18px; 
+        }
+
+        .bullet-list li {
+            font-size: 1rem;
+            line-height: 1.5;
+            display: flex;
+            gap: 12px;
+        }
+
+        .bullet-list li::before { 
+            content: "—"; 
+            color: var(--brand-gold); 
+        }
+
+        /* --- TESTIMONIAL CARDS --- */
+        .testimonial-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 40px; 
+            margin-top: 20px;
+        }
+
+        .quote-box {
+            background: var(--surface-white);
+            border: 1px solid var(--brand-gold-muted);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .quote-text {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--brand-navy);
+            margin-bottom: 16px;
+        }
+
+        .quote-author { 
+            font-size: 0.75rem; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            color: var(--text-muted); 
+        }
+
+        /* --- CALL TO ACTION BAR --- */
+        .mega-cta-panel {
+            background: var(--brand-navy);
+            color: var(--bg-cream);
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 40px;
+            border: 1px solid var(--brand-gold);
+        }
+
+        .mega-cta-panel h3 {
+            font-family: var(--font-serif);
+            font-size: 2.4rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+
+        .mega-cta-panel p {
+            font-size: 0.95rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--brand-gold);
+            font-weight: 500;
+        }
+
+        /* --- BUTTON MATRICES --- */
+        .btn-premium {
+            background: var(--brand-navy);
+            color: #ffffff;
+            border: 1px solid var(--brand-navy);
+            padding: 16px 40px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            font-family: var(--font-sans);
+        }
+
+        .btn-premium:hover { 
+            background: transparent; 
+            color: var(--brand-navy); 
+        }
+
+        .btn-success {
+            background: #1e5631;
+            color: #ffffff;
+            border: 1px solid #1e5631;
+            padding: 16px 40px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            font-family: var(--font-sans);
+        }
+
+        .btn-success:hover {
+            background: transparent;
+            color: #1e5631;
+        }
+
+        /* --- INTERACTIVE ASSESSMENT INTERFACE --- */
+        .panel-surface {
+            background: var(--surface-white);
+            border: 1px solid var(--brand-gold-muted);
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(3, 20, 36, 0.02);
+            margin-bottom: 50px;
+        }
+
+        .panel-surface h3 { 
+            font-family: var(--font-serif); 
+            font-size: 2rem; 
+            color: var(--brand-navy);
+            text-align: center; 
+            margin-bottom: 8px; 
+        }
+
+        .panel-surface p.subtitle { 
+            font-size: 0.9rem; 
+            color: var(--text-muted); 
+            text-align: center;
+            margin-bottom: 35px; 
+        }
+
+        .quiz-matrix { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 14px; 
+            margin-bottom: 35px; 
+        }
+
+        .matrix-cell {
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 16px 20px;
+            border: 1px solid var(--brand-gold-muted); 
+            background: var(--bg-cream);
+            cursor: pointer; 
+            font-size: 0.85rem; 
+            user-select: none; 
+            transition: all 0.2s ease;
+        }
+
+        .matrix-cell:hover { 
+            border-color: var(--brand-gold); 
+            background: #ffffff; 
+        }
+
+        .matrix-cell input { 
+            width: 16px; 
+            height: 16px; 
+            accent-color: var(--brand-navy); 
+        }
+
+        .results-box { 
+            display: none; 
+            margin-top: 30px; 
+            padding: 20px 24px; 
+            font-size: 0.95rem;
+            line-height: 1.6; 
+            border-left: 4px solid; 
+        }
+
+        .res-stable { background: #f3f7f4; color: #1e5631; border-color: #1e5631; }
+        .res-drift { background: #fffcf4; color: #8a6d1c; border-color: #8a6d1c; }
+        .res-hazard { background: #fff5f5; color: #a12323; border-color: #a12323; }
+
+        /* --- MOCK RESIDENCY FORM TRAPDOOR --- */
+        .hidden-form-wrap {
+            display: none;
+            max-width: 460px;
+            margin: 40px auto 0 auto;
+            background: var(--surface-white);
+            border: 1px solid var(--brand-gold-muted);
+            padding: 40px;
+            box-shadow: 0 12px 35px rgba(3, 20, 36, 0.02);
+            animation: paneFade 0.3s ease-out;
+            text-align: left;
+        }
+
+        .form-group { 
+            margin-bottom: 20px; 
+            text-align: left;
+        }
+
+        .form-group label { 
+            display: block; 
+            font-size: 0.7rem; 
+            font-weight: 600; 
+            margin-bottom: 6px;
+            color: var(--brand-navy); 
+            letter-spacing: 1px; 
+        }
+
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid #cbd5e1; 
+            background: var(--bg-cream); 
+            font-size: 0.85rem; 
+            outline: none; 
+            font-family: var(--font-sans);
+        }
+
+        .trapdoor-footer { 
+            font-size: 0.8rem; 
+            text-align: center; 
+            color: var(--text-muted); 
+            margin-top: 24px; 
+            padding-top: 16px; 
+            border-top: 1px dashed var(--brand-gold-muted); 
+        }
+
+        .trapdoor-link { 
+            background: transparent; 
+            border: none; 
+            color: var(--brand-gold);
+            text-decoration: underline; 
+            cursor: pointer; 
+            font-weight: 600; 
+            font-family: inherit; 
+        }
+
+        /* --- SIGN-IN MODAL OVERLAY --- */
+        .modal-overlay {
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: rgba(3, 20, 36, 0.5); 
+            backdrop-filter: blur(4px);
+            justify-content: center; 
+            align-items: center; 
+            z-index: 1000;
+        }
+
+        .modal-box { 
+            width: 100%; 
+            max-width: 380px; 
+            background: #ffffff; 
+            padding: 40px; 
+            border-top: 4px solid var(--brand-gold); 
+            position: relative; 
+        }
+
+        .modal-box h2 { 
+            font-family: var(--font-serif); 
+            font-size: 1.8rem; 
+            margin-bottom: 20px;
+            text-align: center; 
+            color: var(--brand-navy); 
+            font-weight: 500; 
+        }
+
+        .modal-close { 
+            position: absolute; 
+            top: 14px; 
+            right: 18px; 
+            background: transparent; 
+            border: none; 
+            font-size: 1.4rem; 
+            cursor: pointer; 
+            color: var(--text-muted); 
+            line-height: 1;
+        }
+
+        /* --- SCREEN GLITCH TRANSITION --- */
+        .static-flash-unit { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: 9999; 
+            background: #000000; 
+        }
+
+        .run-static { 
+            display: block !important; 
+            animation: staticBurst 0.6s steps(1) forwards; 
+        }
+
+        @keyframes staticBurst {
+            0% { background: #080a0f; opacity: 1; }
+            20% { 
+                background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.6) 50%),
+                            linear-gradient(90deg, rgba(255,0,0,0.15), rgba(0,255,0,0.1), rgba(0,0,255,0.15));
+                background-size: 100% 4px, 4px 100%; 
+                transform: scaleY(1.05) skewX(-3deg); 
+            }
+            40% { background: #ffffff; clip-path: inset(15% 0 50% 0); }
+            60% { background: #151515; transform: translateX(8px); }
+            80% { background: #ffffff; transform: scaleY(0.02); }
+            100% { opacity: 0; transform: scale(0); }
+        }
+
+        /* --- ADMINISTRATIVE OPERATOR VIEW --- */
+        .terminal-container {
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background: var(--admin-bg); 
+            z-index: 5000; 
+            justify-content: center; 
+            align-items: center;
+            padding: 24px;
+        }
+
+        .terminal-shell { 
+            width: 100%; 
+            max-width: 600px; 
+            background: #0b0f16; 
+            border: 1px solid #21262d; 
+            padding: 40px; 
+            font-family: 'JetBrains Mono', monospace; 
+        }
+
+        .terminal-header { 
+            color: var(--admin-green); 
+            font-size: 0.85rem; 
+            margin-bottom: 24px;
+            padding-bottom: 12px; 
+            border-bottom: 1px dashed #30363d; 
+        }
+
+        .terminal-btn { 
+            background: transparent; 
+            border: 1px solid var(--admin-green); 
+            color: var(--admin-green); 
+            font-family: inherit; 
+            padding: 12px 20px; 
+            cursor: pointer; 
+            font-size: 0.8rem;
+        }
+
+        .terminal-btn:hover { 
+            background: var(--admin-green); 
+            color: var(--admin-bg); 
+        }
+
+        .terminal-alert-box { 
+            margin-top: 25px; 
+            border-left: 4px solid var(--admin-green);
+            background: rgba(0, 255, 102, 0.02); 
+            padding: 18px; 
+            color: var(--admin-text); 
+            font-size: 0.85rem;
+            line-height: 1.5; 
+        }
+
+        /* --- FOOTER LAYOUT --- */
+        footer {
+            background: var(--brand-navy);
+            border-top: 1px solid var(--brand-gold);
+            color: var(--bg-cream);
+            padding: 40px 24px;
+            text-align: center;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+
+        footer span { 
+            color: var(--brand-gold); 
+            margin: 0 15px; 
+        }
+
+        @media (max-width: 968px) {
+            .hero-banner { 
+                grid-template-columns: 1fr; 
+                gap: 40px; 
+                text-align: center; 
+                padding-top: 40px; 
+            }
+            .hero-left h1 { font-size: 3.2rem; }
+            .hero-left .divider { margin: 0 auto 24px auto; }
+            .two-column, .three-column, .quiz-matrix, .testimonial-grid { 
+                grid-template-columns: 1fr;
+                gap: 40px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="static-flash-unit" id="transitionBlinkElement"></div>
+
+    <header>
+        <div class="nav-container">
+            <div class="nav-brand">
+                Everbright City
+            </div>
+            <div class="nav-menu">
+                <button class="nav-link active" id="menu-tab-1" onclick="switchTab(1)">Home</button>
+                <button class="nav-link" id="menu-tab-2" onclick="switchTab(2)">About</button>
+            </div>
+        </div>
+    </header>
+
+    <div id="civilianViewContext">
+        <main id="pane-tab-1" class="tab-content active">
+            <section class="hero-banner">
+                <div class="hero-left">
+                    <h2>welcome to</h2>
+                    <h1>The Everbright City</h1>
+                    <div class="divider"></div>
+                    <p>A city without pain. A city without conflict. A city where everyone is happy.</p>
+                    <button class="btn-premium" onclick="switchTab(3)">CLICK TO BECOME A NEW MEMBER</button>
+                </div>
+                <div class="photo-matrix">
+                    <img src="entrance.png" alt="Everbright City Concept Overview">
+                </div>
+            </section>
+
+            <section class="magazine-layout">
+                <div class="two-column" style="align-items: center;">
+                    <div class="photo-matrix">
+                        <img src="mayor.png" alt="Official Proclamation Document from the Mayors Office">
+                    </div>
+                    <div class="article-block">
+                        <span class="label">Official Welcome</span>
+                        <h3>A Message from the Mayor</h3>
+                        <p style="margin-bottom: 14px; font-style: italic; font-size: 1.05rem; color: var(--brand-navy);">"Happiness is a choice"</p>
+                        <p style="color: var(--text-muted); margin-bottom: 12px;">
+                            For generations, humanity struggled with conflict and loss. Here, we’ve found a better way. Built on the belief that happiness shouldn't be left to chance, our city offers every resident emotional stability, social harmony, and peace.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="magazine-layout">
+                <div class="testimonial-grid">
+                    <div class="quote-box">
+                        <p class="quote-text"><b>"Sometimes I feel like I've forgotten something important, but I'm sure it's nothing."</b></p>
+                        <p class="quote-author">— yi ting ( 4 years into everybright city )</p>
+                    </div>
+                    <div class="quote-box">
+                        <p class="quote-text"><b>"Life is much easier when you stop asking difficult questions."</b></p>
+                        <p class="quote-author">— victor lee ( 5 years into everbright city )</p>
+                    </div>
+                       <div class="quote-box">
+                        <p class="quote-text"><b>"I can't remember the last time I cried"</b></p>
+                        <p class="quote-author">— jun hao ( 2 years into everybright city )</p>
+                    </div>   <div class="quote-box">
+                        <p class="quote-text"><b>"I've never felt sad since moving here."</b></p>
+                        <p class="quote-author">— mei lin ( 3 years into everybright city )</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="magazine-layout" style="padding-bottom: 40px;">
+                <div class="mega-cta-panel">
+                    <h3>EVERBRIGHT CITY</h3>
+                    <p>no pain &nbsp;|&nbsp; no worry &nbsp;|&nbsp; no memory burden</p>
+                </div>
+            </section>
+        </main>
+
+        <main id="pane-tab-2" class="tab-content">
+            <section class="hero-banner">
+                <div class="hero-left">
+                    <h2>About</h2>
+                    <h1>Everbright City</h1>
+                    <div class="divider"></div>
+                    <p>Everbright city was founded on the principles of harmony, stability, and well-being, Everbright City has become a model community admired around the world.</p>
+                    <ul class="checklist-group">
+                        <li>No violent crime</li>
+                        <li>No social unrest</li>
+                        <li>No emotional suffering</li>
+                        <li>No discrimination</li>
+                        <li>No poverty</li>
+                        <li>Happy and productive citizens</li>
+                    </ul>
+                </div>
+                <div class="photo-matrix">
+                    <img src="picnic.png" alt="Realtime Resident Demographic Metrics Matrix">
+                </div>
+            </section>
+
+            <section class="magazine-layout">
+                <div class="article-block" style="margin-bottom: 40px;">
+                    <span class="label">Sanitized Coordinates</span>
+                    <h3>Featured Attractions</h3>
+                </div>
+                <div class="three-column">
+                    <div class="article-block">
+                        <div class="photo-matrix" style="margin-bottom: 16px;">
+                            <img src="N12.png" alt="Center Hub">
+                        </div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 8px;">Emotional Wellness Centre N12</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">An art gallery for expression. Art heals. Art connects. Art inspires.</p>
+                    </div>
+                    <div class="article-block">
+                        <div class="photo-matrix" style="margin-bottom: 16px;">
+                            <img src="plaza.png" alt="Memory Garden Architecture Preview">
+                        </div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 8px;">Harmony Plaza</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">The heart of the city. A place to gather, celebrate, and embrace the joy of togetherness.</p>
+                    </div>
+                    <div class="article-block">
+                        <div class="photo-matrix" style="margin-bottom: 16px;">
+                            <img src="service.png" alt="Stability Facility">
+                        </div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 8px;">Citizen Services Office</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Here to assist you with everything you need for a smooth and happy life in Everbright City.</p>
+                    </div>
+                    <div class="article-block">
+                        <div class="photo-matrix" style="margin-bottom: 16px;">
+                            <img src="garden.png" alt="Center Hub">
+                        </div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 8px;">Memory Garden</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">A peaceful garden to relax, unwind, and find gratitude in the beautiful moments.</p>
+                    </div><div class="article-block">
+                        <div class="photo-matrix" style="margin-bottom: 16px;">
+                            <img src="research.png" alt="Center Hub">
+                        </div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 8px;">Research Institute</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Driving innovation for a brighter future through advanced research and technology.</p>
+                    </div><div class="article-block">
+                        <div class="photo-matrix" style="margin-bottom: 16px;">
+                            <img src="community.png" alt="Center Hub">
+                        </div>
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 8px;">Community Recreation Zone</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Stay active, make friends, and enjoy a happy, relaxed lifestyle together.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <main id="pane-tab-3" class="tab-content">
+            <section class="magazine-layout" style="border-top: none;">
+                <div class="article-block" style="margin-bottom: 35px; text-align: center;">
+                    <span class="label">The Visitor page</span>
+                    <h3><b>Visitor Guidelines &amp; Citizen Self Assessment</b></h3>
+                </div>
+                
+                <div class="two-column">
+                    <div class="article-block">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 16px; color: var(--brand-navy);">Required Conduct<br><br></h4>
+                        <ul class="bullet-list">
+                            <li>Maintain a positive attitude at all times</li>
+                            <li>Do not discuss distressing memories or negative experiences</li>
+                            <li>Respect city authorities and staff</li>
+                            <li>Report suspicious behavior immediately</li>
+                            <li>Follow all instructions provided by city representatives</li>
+                            <li>Citizens displaying emotional instability may be referred for evaluation</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel-surface">
+                        <h3>Citizen Self Assessment</h3>
+                        <p class="subtitle">How are you feeling today? ( Select all that apply )</p>
+                        <div class="quiz-matrix">
+                            <label class="matrix-cell"><input type="checkbox"> Angry</label>
+                            <label class="matrix-cell"><input type="checkbox"> Lonely</label>
+                            <label class="matrix-cell"><input type="checkbox"> Regretful</label>
+                            <label class="matrix-cell"><input type="checkbox"> Nostalgic</label>
+                            <label class="matrix-cell"><input type="checkbox"> Curious</label>
+                            <label class="matrix-cell"><input type="checkbox"> Doubtful</label>
+                        </div>
+                        <button class="btn-premium" style="width: 100%;" onclick="evaluateSelfMetrics()">Sumbit assessment</button>
+                        <div id="selfAssessmentLogBox" class="results-box"></div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 50px;">
+                    <button class="btn-premium" style="background: transparent; color: var(--brand-navy);" onclick="toggleResidencyForm()">
+                        [ Apply for Residency ]
+                    </button>
+                    
+                    <div class="hidden-form-wrap" id="mockApplicationFormContainer">
+                        <h4 style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--brand-navy); margin-bottom: 20px;">Residency Registration<br>(all information whont be saved)</h4>
+                        
+                        <div class="form-group">
+                            <label>EMAIL ADDRESS</label>
+                            <input type="text" id="regFullName" placeholder="all information will not be saved.">
+                        </div>
+                        <div class="form-group">
+                            <label>CREATE PASSWORD</label>
+                            <input type="text" id="regPassword" placeholder="all information will not be saved.">
+                        </div>
+                        <div class="form-group">
+                            <label>RE-TYPE PASSWORD</label>
+                            <input type="text" id="regRePassword" placeholder="all information will not be saved.">
+                        </div>
+
+                        <button class="btn-premium" style="width: 100%; margin-top: 12px; margin-bottom: 10px;" onclick="executeMockRegistration(event)">Create account</button>
+
+                        <div class="trapdoor-footer">
+                            Already a Citizen or Staff? <button class="trapdoor-link" onclick="openBackdoorModal()">Sign in here</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="backdoorSecurityGateModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeBackdoorModal()">&times;</button>
+            <h2>Sign in</h2>
+            <div class="form-group">
+                <input type="text" id="credentialUserSig" placeholder="e.g. Mayor " autocomplete="off" onkeydown="catchEnterKey(event)">
+            </div>
+            <div class="form-group" style="margin-bottom: 25px;">
+                <input type="password" id="credentialPassSig" placeholder="Password" onkeydown="catchEnterKey(event)">
+            </div>
+            <div id="modalBypassErrorLabel" style="color: #b91c1c; font-size: 0.8rem; font-weight: 500; text-align: center; margin-bottom: 16px; display: none;">
+                Verification variance. Connection aborted.
+            <br>[][]&lt;[][]&lt;[][]</div>
+            <button class="btn-premium" style="width: 100%;" onclick="runCredentialHandshake()">sign in</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="accountSuccessModal">
+        <div class="modal-box" style="border-top: 4px solid #1e5631; text-align: center; max-width: 420px;">
+            <button class="modal-close" onclick="closeSuccessModal()">&times;</button>
+            <div style="font-size: 2.8rem; color: #1e5631; margin-bottom: 12px; line-height: 1;">✓</div>
+            <h2 style="margin-bottom: 12px; color: var(--brand-navy);">Successful</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">Your account have been created, you can now enjoy our city.&nbsp;</p>
+            <button class="btn-success" style="width: 100%;" onclick="closeSuccessModal()">Back to main</button>
+        </div>
+    </div>
+
+    <section class="terminal-container" id="privilegedOperatorConsole">
+        <div class="terminal-shell">
+            <div class="terminal-header" id="terminalLogHeaderField">&gt; STATION LOG LOADED SUCCESSFULLY</div>
+            <div id="terminalActionRowField" style="text-align: center; margin-top: 20px;">
+                <button class="terminal-btn" onclick="decryptCoreRegisters()">[ ACCESS STATION LOGS ]</button>
+            </div>
+            <div id="hiddenLogTerminalStreamBlock" class="terminal-alert-box" style="display: none;">
+                [MESSAGE]: WHAT YOU ARE LOOKING FOR IS HIDDEN BEHIND IN N12 ART GALLERY
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        happiness is choice&nbsp;<span>|</span>&nbsp;together, we build a better future</footer>
+
+    <script>
+        function switchTab(idx) {
+            document.querySelectorAll('.tab-content').forEach(pane => pane.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(`pane-tab-${idx}`).classList.add('active');
+            document.getElementById(`menu-tab-${idx}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'instant' });
+        }
+
+        function evaluateSelfMetrics() {
+            const boxesChecked = document.querySelectorAll('.quiz-matrix input[type="checkbox"]:checked').length;
+            const logElement = document.getElementById('selfAssessmentLogBox');
+            
+            logElement.className = "results-box";
+            logElement.style.display = "block";
+            
+            if (boxesChecked <= 1) {
+                logElement.classList.add('res-stable');
+                logElement.innerHTML = "✓ <strong> Excellent Emotional Stability:</strong> Experiencing a healthy emotional state. Keep it up!";
+            } else if (boxesChecked <= 3) {
+                logElement.classList.add('res-drift');
+                logElement.innerHTML = "⚠ <strong> Monitoring Recommended:</strong> Some emotion may need attention. Check-in are recommended to maintain your well-being";
+            } else {
+                logElement.classList.add('res-hazard');
+                logElement.innerHTML = "🛑 <strong> Please visit N12 Emotional Wellness Centre:</strong> Looks like you are experiencing emotional distress. Our professionals are here to help. You are not alone.";
+            }
+        }
+
+        function toggleResidencyForm() {
+            const form = document.getElementById('mockApplicationFormContainer');
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+            } else {
+                form.style.display = 'block';
+                form.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function executeMockRegistration(e) {
+            if (e) e.preventDefault();
+            
+            const fullNameField = document.getElementById('regFullName').value.trim();
+            if (!fullNameField) {
+                alert("Municipal registry requires a full identity string to initialize tracking configurations.");
+                return;
+            }
+
+            document.getElementById('accountSuccessModal').style.display = 'flex';
+            
+            document.getElementById('regFullName').value = '';
+            document.getElementById('regPassword').value = '';
+            document.getElementById('regRePassword').value = '';
+            document.getElementById('mockApplicationFormContainer').style.display = 'none';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('accountSuccessModal').style.display = 'none';
+        }
+
+        function openBackdoorModal() {
+            document.getElementById('backdoorSecurityGateModal').style.display = 'flex';
+            document.getElementById('credentialUserSig').focus();
+        }
+
+        function closeBackdoorModal() {
+            document.getElementById('backdoorSecurityGateModal').style.display = 'none';
+        }
+
+        function catchEnterKey(e) {
+            if (e.key === "Enter") runCredentialHandshake();
+        }
+
+        function runCredentialHandshake() {
+            const user = document.getElementById('credentialUserSig').value.trim();
+            const pass = document.getElementById('credentialPassSig').value.trim();
+            const errField = document.getElementById('modalBypassErrorLabel');
+            
+            if (user === "Mayor" && pass === "182736") {
+                errField.style.display = 'none';
+                closeBackdoorModal();
+                triggerCinematicGlitchEffect();
+            } else {
+                errField.style.display = 'block';
+            }
+        }
+
+        function triggerCinematicGlitchEffect() {
+            const staticScreen = document.getElementById('transitionBlinkElement');
+            staticScreen.classList.add('run-static');
+            
+            setTimeout(() => {
+                document.getElementById('civilianViewContext').style.display = 'none';
+                document.querySelector('header').style.display = 'none';
+                document.querySelector('footer').style.display = 'none';
+                document.getElementById('privilegedOperatorConsole').style.display = 'flex';
+                staticScreen.classList.remove('run-static');
+            }, 600);
+        }
+
+        function decryptCoreRegisters() {
+            const buttonField = document.getElementById('terminalActionRowField');
+            const hiddenLogs = document.getElementById('hiddenLogTerminalStreamBlock');
+            const systemLogTitle = document.getElementById('terminalLogHeaderField');
+            
+            systemLogTitle.innerHTML = "&gt; LOADING STATION LOGS...";
+            buttonField.style.display = 'none';
+            
+            setTimeout(() => {
+                systemLogTitle.innerHTML = "&gt; STATION LOG LOADED SUCCESSFULLY.";
+                hiddenLogs.style.display = 'block';
+            }, 750);
+        }
+    </script>
+</body>
+</html>
